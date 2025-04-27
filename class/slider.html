@@ -1,0 +1,75 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="result" style="width: 100px; height: 20px"></div>
+    <div id="result-text"></div>
+    <div style="width: 100%; height: 100%; display: flex">
+      <div
+        id="slider"
+        style="
+          margin: auto;
+          position: relative;
+          width: 300px;
+          height: 10px;
+          background-color: #ddd;
+          border-radius: 5px;
+        "
+      >
+        <div
+          id="sliderdot"
+          style="
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: black;
+            border-radius: 70%;
+            top: 50%;
+            left: 0;
+            transform: translate(0%, -50%);
+            cursor: pointer;
+          "
+        ></div>
+      </div>
+    </div>
+
+    <script>
+      const dot = document.getElementById("sliderdot");
+      const slider = document.getElementById("slider");
+      const result = document.getElementById("result");
+      const result_text = document.getElementById("result-text");
+      let isDrag = false;
+      console.log("isDrag : ", isDrag);
+
+      dot.addEventListener("mousedown", (e) => {
+        isDrag = true;
+        console.log("isDrag : ", isDrag);
+      });
+
+      document.addEventListener("mouseup", (e) => {
+        isDrag = false;
+        console.log("isDrag : ", isDrag);
+      });
+
+      document.addEventListener("mousemove", (e) => {
+        if (!isDrag) return;
+        // console.log("slider : ", slider.getBoundingClientRect());
+        // console.log("event : ", e.clientX, ", ", e.clientY);
+
+        let rect = slider.getBoundingClientRect();
+        let x = e.clientX - rect.left;
+        console.log("x : ", x);
+
+        x = Math.max(0, Math.min(x, rect.width));
+
+        dot.style.left = `${x}px`;
+        dot.style.backgroundColor = "rgb(" + x + ",0,0)";
+        result.style.backgroundColor = "rgb(" + x + ",0,0)";
+        result_text.innerHTML = x;
+      });
+    </script>
+  </body>
+</html>
