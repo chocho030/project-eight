@@ -1,0 +1,25 @@
+/* 타이틀 */
+.title {
+  position: absolute;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* 메인 */
+.main {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10rem;
+}
+
+.content {
+  width: 20rem;
+
+  transition: all 1s ease-in-out;
+}
+.content-img {
+  width: 100%;
+}
