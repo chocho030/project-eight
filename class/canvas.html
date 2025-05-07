@@ -1,0 +1,24 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <canvas id="my_canvas" width="500" height="500"> </canvas>
+    <script>
+      const myCanvas = document.getElementById("my_canvas");
+      const ctx = myCanvas.getContext("2d");
+
+      //   myCanvas.addEventListener("click", (e) => {
+      //     ctx.fillStyle = "skyblue";
+      //     // ctx.fillRect(e.clientX, e.clientY, 50, 50);
+      //     ctx.arc(e.clientX, e.clientY, 20, 0, Math.PI * 2);
+      // (x position, y position, length, start angle, end angle)
+      //     ctx.fill();
+      //   });
+      ctx.fillRect(100, 100, 50, 50);
+      // (x positionn, y position, width, height)
+    </script>
+  </body>
+</html>
