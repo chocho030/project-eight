@@ -1,0 +1,52 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="result" style="width: 100px; height: 20px"></div>
+    <canvas id="my_canvas" width="500" height="500" style="margin-top: 3rem">
+    </canvas>
+    <script>
+      const myCanvas = document.getElementById("my_canvas");
+      const ctx = myCanvas.getContext("2d");
+      const result = document.getElementById("result");
+
+      const wgradient = ctx.createLinearGradient(0, 0, 200, 0);
+
+      // Add color stops
+      wgradient.addColorStop(0, "white");
+      wgradient.addColorStop(1, "blue");
+
+      // Set the fill style and draw a rectangle
+      ctx.fillStyle = wgradient;
+      ctx.fillRect(0, 0, 200, 200);
+
+      const hgradient = ctx.createLinearGradient(0, 0, 0, 200);
+
+      // Add color stops
+      hgradient.addColorStop(0, "rgba(255,255,255,0 )");
+      hgradient.addColorStop(1, "rgba(0,0,0,1)");
+
+      // Set the fill style and draw a rectangle
+      ctx.fillStyle = hgradient;
+      ctx.fillRect(0, 0, 200, 200);
+
+      myCanvas.addEventListener("mousedown", (e) => {
+        const rect = myCanvas.getBoundingClientRect();
+        console.log(rect);
+        console.log(e.clientX, e.clientY);
+        const x = e.clientX - rect.x;
+        const y = e.clientY - rect.y;
+        console.log(x, y);
+
+        console.log(ctx.getImageData(x, y, 1, 1).data);
+        const colorData = ctx.getImageData(x, y, 1, 1).data;
+        console.log(`rgb(${colorData[0]},${colorData[1]},${colorData[2]})`);
+        result.innerHTML = `rgb(${colorData[0]},${colorData[1]},${colorData[2]})`;
+        result.style.backgroundColor = `rgb(${colorData[0]},${colorData[1]},${colorData[2]})`;
+      });
+    </script>
+  </body>
+</html>
