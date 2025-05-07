@@ -6,5 +6,23 @@
 
     <link rel="stylesheet" href="../css/color.css" />
   </head>
-  <body></body>
+  <body>
+    <div class="title">COLOR PICKER</div>
+    <div class="main">
+      <canvas id="palette" width="500" height="500"> </canvas>
+      <div id="palette-dot"></div>
+
+      <div class="result">
+        <div class="palette-result" id="palette-result"></div>
+        <div onclick="copy('rgb')" class="rgb-result" id="rgb-result">
+          rgb : (0,0,0)
+        </div>
+        <div onclick="copy('hex')" class="hex-result" id="hex-result">
+          hex : #ffffff
+        </div>
+      </div>
+    </div>
+
+    <script src="../js/color.js"></script>
+  </body>
 </html>
