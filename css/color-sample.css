@@ -1,0 +1,27 @@
+.palette-result {
+}
+
+#palette-dot {
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 70%;
+  border: 1px solid black;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 10;
+}
+
+#palette {
+  margin-left: 10rem;
+}
+
+/* #dot {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 70%;
+  border: 1px solid black;
+  transform: translate(0%, -50%);
+  cursor: pointer;
+} */
