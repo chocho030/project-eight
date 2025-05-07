@@ -7,13 +7,14 @@
   <body>
     <div id="result" style="width: 100px; height: 20px"></div>
     <div id="result-text"></div>
+    <canvas id="canvas" width="500" height="500"> </canvas>
     <div style="width: 100%; height: 100%; display: flex">
       <div
         id="slider"
         style="
           margin: auto;
           position: relative;
-          width: 300px;
+          width: 600px;
           height: 10px;
           background-color: #ddd;
           border-radius: 5px;
@@ -27,7 +28,7 @@
             height: 20px;
             background: black;
             border-radius: 70%;
-            top: 50%;
+            top: 10%;
             left: 0;
             transform: translate(0%, -50%);
             cursor: pointer;
@@ -43,6 +44,8 @@
       const result_text = document.getElementById("result-text");
       let isDrag = false;
       console.log("isDrag : ", isDrag);
+      const myCanvas = document.getElementById("canvas");
+      const ctx = myCanvas.getContext("2d");
 
       dot.addEventListener("mousedown", (e) => {
         isDrag = true;
@@ -61,14 +64,65 @@
 
         let rect = slider.getBoundingClientRect();
         let x = e.clientX - rect.left;
-        console.log("x : ", x);
 
         x = Math.max(0, Math.min(x, rect.width));
 
+        console.log("x : ", x);
+
+        if (x < 100) {
+          // G 0 -> 100
+          r = 255;
+          g = x * 2.55;
+          b = 0;
+        } else if (x < 200) {
+          // R 100 -> 0
+          z = x - 100;
+          r = 255 - z * 2.55;
+          g = 255;
+          b = 0;
+        } else if (x < 300) {
+          // B 0 -> 100
+          z = x - 200;
+          r = 0;
+          g = 255;
+          b = z * 2.55;
+        } else if (x < 400) {
+          // G 100 -> 0
+          z = x - 300;
+          r = 0;
+          g = 255 - z * 2.55;
+          b = 255;
+        } else if (x < 500) {
+          // R 0 -> 100
+          z = x - 400;
+          r = z * 2.55;
+          g = 0;
+          b = 255;
+        } else if (x < 600) {
+          // B 100 -> 0
+          z = x - 500;
+          r = 255;
+          g = 0;
+          b = 255 - z * 2.55;
+        }
+
         dot.style.left = `${x}px`;
-        dot.style.backgroundColor = "rgb(" + x + ",0,0)";
-        result.style.backgroundColor = "rgb(" + x + ",0,0)";
-        result_text.innerHTML = x;
+
+        dot.style.backgroundColor = `rgb(${r},${g},${b})`;
+        result.style.backgroundColor = `rgb(${r},${g},${b})`;
+        result_text.innerHTML = `rgb("${r},${g},${b}")`;
+        console.log(`rgb("${r},${g},${b}")`);
+
+        //
+        const gradient = ctx.createLinearGradient(0, 0, 500, 0);
+
+        // Add color stops
+        gradient.addColorStop(0, "white");
+        gradient.addColorStop(1, `rgb(${r},${g},${b})`);
+
+        // Set the fill style and draw a rectangle
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, 500, 500);
       });
     </script>
   </body>
